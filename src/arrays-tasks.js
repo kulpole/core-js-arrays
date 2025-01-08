@@ -434,7 +434,7 @@ function getFalsyValuesCount(arr) {
  *                              [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  const matrix = Array.from({ length: n }, function () {
+  const matrix = Array.from({ length: n }, function fillTheMatrix() {
     return Array(n).fill(0);
   });
   return matrix.map((element, index) => {
@@ -474,8 +474,27 @@ function getIndicesOfOddNumbers(numbers) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  return arr.reduce((acc, element) => {
+    let hexValue = element.toString(16).toUpperCase();
+    if (hexValue.length === 5) {
+      hexValue = `0${hexValue}`;
+    }
+    if (hexValue.length === 4) {
+      hexValue = `00${hexValue}`;
+    }
+    if (hexValue.length === 3) {
+      hexValue = `000${hexValue}`;
+    }
+    if (hexValue.length === 2) {
+      hexValue = `0000${hexValue}`;
+    }
+    if (hexValue.length === 1) {
+      hexValue = `00000${hexValue}`;
+    }
+    acc.push(`#${hexValue}`);
+    return acc;
+  }, []);
 }
 
 /**
